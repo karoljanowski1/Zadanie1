@@ -48,19 +48,29 @@ def calculate_grades():
     grades_count = int(input('Podaj liczbę ocen\n'))
 
     if grades_count <= 0:
-      print('Liczba ocen musi być większa od zera')
-      return
+        print('Liczba ocen musi być większa od zera')
+        return
 
     grades = []
     for i in range(grades_count):
-      grades.append(float(input(f'Podaj ocenę {i + 1}\n')))
+      while True:
+          try:
+              grade = float(input(f'Podaj ocenę {i + 1}\n'))
+
+              if 1 <= grade <= 6:
+                  grades.append(grade)
+                  break
+              else:
+                  print('Ocena musi być w przedziale 1-6')
+          except ValueError:
+              print('Podana wartość nie jest liczbą')
+
   except ValueError:
-    print('Podana wartość nie jest liczbą')
-    return
+      print('Podana wartość nie jest liczbą')
+      return
 
   average = sum(grades) / len(grades)
   print(f'Średnia ocen: {average}')
-
 
 try:
   exercise = int(input('Podaj numer ćwiczenia (1, 2, 3)\n'))
